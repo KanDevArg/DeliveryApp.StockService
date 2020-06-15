@@ -1,0 +1,25 @@
+syntax = "proto3";
+package model.stock;
+
+option go_package = ".;protoGo";
+
+service StockService {
+    rpc GetStockInfo(GetStockInfoRequest) returns (GetStockInfoResponse) {}
+}
+
+message Product {
+    string id = 1;
+    int32 stockQty = 3;
+}
+
+message GetStockInfoRequest {
+    string productId = 1;
+}
+
+message GetStockInfoResponse {
+    string productId = 1;
+    int32 stockQty = 2;
+}
+
+  
+  
