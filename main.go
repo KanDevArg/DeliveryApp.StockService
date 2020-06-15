@@ -4,17 +4,17 @@ import (
 	"context"
 	"fmt"
 
-	protoGo "github.com/kandevarg/deliveryapp.stockservice/proto/protoGo"
+	stockServiceProtoGo "github.com/kandevarg/deliveryapp.stockservice/proto/protoGo"
 	micro "github.com/micro/go-micro"
 )
 
 //Repository ...
 type Repository interface {
-	GetStockInfo(*protoGo.GetStockInfoRequest) (int32, error)
+	GetStockInfo(*stockServiceProtoGo.GetStockInfoRequest) (int32, error)
 }
 
 type memoryRepository struct {
-	stocks []*protoGo.Product
+	stocks []*stockServiceProtoGo.Product
 }
 
 // Our grpc service handler
@@ -23,7 +23,7 @@ type service struct {
 }
 
 //GetStockInfo ...
-func (repo *memoryRepository) GetStockInfo(req *protoGo.GetStockInfoRequest) (int32, error) {
+func (repo *memoryRepository) GetStockInfo(req *stockServiceProtoGo.GetStockInfoRequest) (int32, error) {
 
 	for _, product := range repo.stocks {
 		if product.Id == req.ProductId {
@@ -34,7 +34,7 @@ func (repo *memoryRepository) GetStockInfo(req *protoGo.GetStockInfoRequest) (in
 	return 0, nil
 }
 
-func (s *service) GetStockInfo(ctx context.Context, req *protoGo.GetStockInfoRequest, res *protoGo.GetStockInfoResponse) error {
+func (s *service) GetStockInfo(ctx context.Context, req *stockServiceProtoGo.GetStockInfoRequest, res *stockServiceProtoGo.GetStockInfoResponse) error {
 
 	// // Find the next available vessel
 	stockQty, err := s.repo.GetStockInfo(req)
@@ -42,7 +42,7 @@ func (s *service) GetStockInfo(ctx context.Context, req *protoGo.GetStockInfoReq
 		return err
 	}
 
-	res = &protoGo.GetStockInfoResponse{
+	res = &stockServiceProtoGo.GetStockInfoResponse{
 		ProductId: req.ProductId,
 		StockQty:  stockQty,
 	}
@@ -52,16 +52,16 @@ func (s *service) GetStockInfo(ctx context.Context, req *protoGo.GetStockInfoReq
 
 func main() {
 
-	stocks := []*protoGo.Product{
-		&protoGo.Product{
+	stocks := []*stockServiceProtoGo.Product{
+		&stockServiceProtoGo.Product{
 			Id:       "1",
 			StockQty: 10,
 		},
-		&protoGo.Product{
+		&stockServiceProtoGo.Product{
 			Id:       "2",
 			StockQty: 30,
 		},
-		&protoGo.Product{
+		&stockServiceProtoGo.Product{
 			Id:       "3",
 			StockQty: 200,
 		},
@@ -78,7 +78,7 @@ func main() {
 	microService.Init()
 
 	// Register our implementation with
-	protoGo.RegisterStockServiceHandler(microService.Server(), &service{repo})
+	stockServiceProtoGo.RegisterStockServiceHandler(microService.Server(), &service{repo})
 
 	// Run the servers
 	if err := microService.Run(); err != nil {
