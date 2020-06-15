@@ -5,6 +5,15 @@ option go_package = ".;protoGo";
 
 service StockService {
     rpc GetStockInfo(GetStockInfoRequest) returns (GetStockInfoResponse) {}
+    rpc Ping(PingRequest) returns (PingResponse){}
+}
+
+message PingRequest {
+    string callerName =1;
+}
+
+message PingResponse {
+    string greetings = 1;
 }
 
 message Product {

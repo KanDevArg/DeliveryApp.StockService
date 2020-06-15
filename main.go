@@ -50,6 +50,13 @@ func (s *service) GetStockInfo(ctx context.Context, req *stockServiceProtoGo.Get
 	return nil
 }
 
+func (s *service) Ping(ctx context.Context, req *stockServiceProtoGo.PingRequest, res *stockServiceProtoGo.PingResponse) error {
+	res = &stockServiceProtoGo.PingResponse{
+		Greetings: "Hello there caller : " + req.CallerName,
+	}
+	return nil
+}
+
 func main() {
 
 	stocks := []*stockServiceProtoGo.Product{

@@ -26,6 +26,84 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type PingRequest struct {
+	CallerName           string   `protobuf:"bytes,1,opt,name=callerName,proto3" json:"callerName,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PingRequest) Reset()         { *m = PingRequest{} }
+func (m *PingRequest) String() string { return proto.CompactTextString(m) }
+func (*PingRequest) ProtoMessage()    {}
+func (*PingRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9a1bb8b15836ba16, []int{0}
+}
+
+func (m *PingRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PingRequest.Unmarshal(m, b)
+}
+func (m *PingRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PingRequest.Marshal(b, m, deterministic)
+}
+func (m *PingRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PingRequest.Merge(m, src)
+}
+func (m *PingRequest) XXX_Size() int {
+	return xxx_messageInfo_PingRequest.Size(m)
+}
+func (m *PingRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PingRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PingRequest proto.InternalMessageInfo
+
+func (m *PingRequest) GetCallerName() string {
+	if m != nil {
+		return m.CallerName
+	}
+	return ""
+}
+
+type PingResponse struct {
+	Greetings            string   `protobuf:"bytes,1,opt,name=greetings,proto3" json:"greetings,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PingResponse) Reset()         { *m = PingResponse{} }
+func (m *PingResponse) String() string { return proto.CompactTextString(m) }
+func (*PingResponse) ProtoMessage()    {}
+func (*PingResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9a1bb8b15836ba16, []int{1}
+}
+
+func (m *PingResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PingResponse.Unmarshal(m, b)
+}
+func (m *PingResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PingResponse.Marshal(b, m, deterministic)
+}
+func (m *PingResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PingResponse.Merge(m, src)
+}
+func (m *PingResponse) XXX_Size() int {
+	return xxx_messageInfo_PingResponse.Size(m)
+}
+func (m *PingResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PingResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PingResponse proto.InternalMessageInfo
+
+func (m *PingResponse) GetGreetings() string {
+	if m != nil {
+		return m.Greetings
+	}
+	return ""
+}
+
 type Product struct {
 	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	StockQty             int32    `protobuf:"varint,3,opt,name=stockQty,proto3" json:"stockQty,omitempty"`
@@ -38,7 +116,7 @@ func (m *Product) Reset()         { *m = Product{} }
 func (m *Product) String() string { return proto.CompactTextString(m) }
 func (*Product) ProtoMessage()    {}
 func (*Product) Descriptor() ([]byte, []int) {
-	return fileDescriptor_9a1bb8b15836ba16, []int{0}
+	return fileDescriptor_9a1bb8b15836ba16, []int{2}
 }
 
 func (m *Product) XXX_Unmarshal(b []byte) error {
@@ -84,7 +162,7 @@ func (m *GetStockInfoRequest) Reset()         { *m = GetStockInfoRequest{} }
 func (m *GetStockInfoRequest) String() string { return proto.CompactTextString(m) }
 func (*GetStockInfoRequest) ProtoMessage()    {}
 func (*GetStockInfoRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_9a1bb8b15836ba16, []int{1}
+	return fileDescriptor_9a1bb8b15836ba16, []int{3}
 }
 
 func (m *GetStockInfoRequest) XXX_Unmarshal(b []byte) error {
@@ -124,7 +202,7 @@ func (m *GetStockInfoResponse) Reset()         { *m = GetStockInfoResponse{} }
 func (m *GetStockInfoResponse) String() string { return proto.CompactTextString(m) }
 func (*GetStockInfoResponse) ProtoMessage()    {}
 func (*GetStockInfoResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_9a1bb8b15836ba16, []int{2}
+	return fileDescriptor_9a1bb8b15836ba16, []int{4}
 }
 
 func (m *GetStockInfoResponse) XXX_Unmarshal(b []byte) error {
@@ -160,6 +238,8 @@ func (m *GetStockInfoResponse) GetStockQty() int32 {
 }
 
 func init() {
+	proto.RegisterType((*PingRequest)(nil), "model.stock.PingRequest")
+	proto.RegisterType((*PingResponse)(nil), "model.stock.PingResponse")
 	proto.RegisterType((*Product)(nil), "model.stock.Product")
 	proto.RegisterType((*GetStockInfoRequest)(nil), "model.stock.GetStockInfoRequest")
 	proto.RegisterType((*GetStockInfoResponse)(nil), "model.stock.GetStockInfoResponse")
@@ -168,20 +248,24 @@ func init() {
 func init() { proto.RegisterFile("stockService.proto", fileDescriptor_9a1bb8b15836ba16) }
 
 var fileDescriptor_9a1bb8b15836ba16 = []byte{
-	// 198 bytes of a gzipped FileDescriptorProto
+	// 271 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2a, 0x2e, 0xc9, 0x4f,
 	0xce, 0x0e, 0x4e, 0x2d, 0x2a, 0xcb, 0x4c, 0x4e, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2,
-	0xce, 0xcd, 0x4f, 0x49, 0xcd, 0xd1, 0x03, 0xcb, 0x28, 0x99, 0x72, 0xb1, 0x07, 0x14, 0xe5, 0xa7,
-	0x94, 0x26, 0x97, 0x08, 0xf1, 0x71, 0x31, 0x65, 0xa6, 0x48, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06,
-	0x31, 0x65, 0xa6, 0x08, 0x49, 0x71, 0x71, 0x80, 0xd5, 0x04, 0x96, 0x54, 0x4a, 0x30, 0x2b, 0x30,
-	0x6a, 0xb0, 0x06, 0xc1, 0xf9, 0x4a, 0xc6, 0x5c, 0xc2, 0xee, 0xa9, 0x25, 0xc1, 0x20, 0xae, 0x67,
-	0x5e, 0x5a, 0x7e, 0x50, 0x6a, 0x61, 0x69, 0x6a, 0x71, 0x89, 0x90, 0x0c, 0x17, 0x67, 0x01, 0xc4,
-	0x34, 0x4f, 0x98, 0x49, 0x08, 0x01, 0xa5, 0x00, 0x2e, 0x11, 0x54, 0x4d, 0xc5, 0x05, 0xf9, 0x79,
-	0xc5, 0xa9, 0xf8, 0x75, 0xa1, 0x38, 0x83, 0x09, 0xd5, 0x19, 0x46, 0xa9, 0x5c, 0x3c, 0xc1, 0x48,
-	0x1e, 0x14, 0x0a, 0xe5, 0xe2, 0x41, 0xb6, 0x41, 0x48, 0x41, 0x0f, 0xc9, 0xaf, 0x7a, 0x58, 0x5c,
-	0x2c, 0xa5, 0x88, 0x47, 0x05, 0xc4, 0x79, 0x4a, 0x0c, 0x4e, 0xdc, 0x51, 0x9c, 0x7a, 0xd6, 0xe0,
-	0xc0, 0x73, 0xcf, 0x4f, 0x62, 0x03, 0x33, 0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0xe0, 0xe2,
-	0x97, 0x59, 0x5b, 0x01, 0x00, 0x00,
+	0xce, 0xcd, 0x4f, 0x49, 0xcd, 0xd1, 0x03, 0xcb, 0x28, 0xe9, 0x72, 0x71, 0x07, 0x64, 0xe6, 0xa5,
+	0x07, 0xa5, 0x16, 0x96, 0xa6, 0x16, 0x97, 0x08, 0xc9, 0x71, 0x71, 0x25, 0x27, 0xe6, 0xe4, 0xa4,
+	0x16, 0xf9, 0x25, 0xe6, 0xa6, 0x4a, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06, 0x21, 0x89, 0x28, 0xe9,
+	0x70, 0xf1, 0x40, 0x94, 0x17, 0x17, 0xe4, 0xe7, 0x15, 0xa7, 0x0a, 0xc9, 0x70, 0x71, 0xa6, 0x17,
+	0xa5, 0xa6, 0x96, 0x64, 0xe6, 0xa5, 0x17, 0x43, 0x95, 0x23, 0x04, 0x94, 0x4c, 0xb9, 0xd8, 0x03,
+	0x8a, 0xf2, 0x53, 0x4a, 0x93, 0x4b, 0x84, 0xf8, 0xb8, 0x98, 0x32, 0x53, 0xa0, 0x2a, 0x98, 0x32,
+	0x53, 0x84, 0xa4, 0xb8, 0x38, 0xc0, 0x0e, 0x08, 0x2c, 0xa9, 0x94, 0x60, 0x56, 0x60, 0xd4, 0x60,
+	0x0d, 0x82, 0xf3, 0x95, 0x8c, 0xb9, 0x84, 0xdd, 0x53, 0x4b, 0x82, 0x41, 0x5c, 0xcf, 0xbc, 0xb4,
+	0x7c, 0x98, 0xdb, 0x64, 0xb8, 0x38, 0x0b, 0x20, 0xa6, 0x79, 0xc2, 0x4c, 0x42, 0x08, 0x28, 0x05,
+	0x70, 0x89, 0xa0, 0x6a, 0x42, 0xb8, 0x10, 0xb7, 0x2e, 0x14, 0x67, 0x30, 0xa1, 0x3a, 0xc3, 0x68,
+	0x09, 0x23, 0x17, 0x4f, 0x30, 0x52, 0xf0, 0x09, 0x85, 0x72, 0xf1, 0x20, 0x5b, 0x21, 0xa4, 0xa0,
+	0x87, 0x14, 0x92, 0x7a, 0x58, 0x9c, 0x2c, 0xa5, 0x88, 0x47, 0x05, 0xc4, 0x7d, 0x4a, 0x0c, 0x42,
+	0xb6, 0x5c, 0x2c, 0xa0, 0x30, 0x15, 0x92, 0x40, 0x51, 0x8c, 0x14, 0x2b, 0x52, 0x92, 0x58, 0x64,
+	0x60, 0xda, 0x9d, 0xb8, 0xa3, 0x38, 0xf5, 0xac, 0xc1, 0x31, 0xeb, 0x9e, 0x9f, 0xc4, 0x06, 0x66,
+	0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xc5, 0xe7, 0xd2, 0x9b, 0xf8, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -193,6 +277,7 @@ var _ server.Option
 
 type StockServiceClient interface {
 	GetStockInfo(ctx context.Context, in *GetStockInfoRequest, opts ...client.CallOption) (*GetStockInfoResponse, error)
+	Ping(ctx context.Context, in *PingRequest, opts ...client.CallOption) (*PingResponse, error)
 }
 
 type stockServiceClient struct {
@@ -223,10 +308,21 @@ func (c *stockServiceClient) GetStockInfo(ctx context.Context, in *GetStockInfoR
 	return out, nil
 }
 
+func (c *stockServiceClient) Ping(ctx context.Context, in *PingRequest, opts ...client.CallOption) (*PingResponse, error) {
+	req := c.c.NewRequest(c.serviceName, "StockService.Ping", in)
+	out := new(PingResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for StockService service
 
 type StockServiceHandler interface {
 	GetStockInfo(context.Context, *GetStockInfoRequest, *GetStockInfoResponse) error
+	Ping(context.Context, *PingRequest, *PingResponse) error
 }
 
 func RegisterStockServiceHandler(s server.Server, hdlr StockServiceHandler, opts ...server.HandlerOption) {
@@ -239,4 +335,8 @@ type StockService struct {
 
 func (h *StockService) GetStockInfo(ctx context.Context, in *GetStockInfoRequest, out *GetStockInfoResponse) error {
 	return h.StockServiceHandler.GetStockInfo(ctx, in, out)
+}
+
+func (h *StockService) Ping(ctx context.Context, in *PingRequest, out *PingResponse) error {
+	return h.StockServiceHandler.Ping(ctx, in, out)
 }
